@@ -1,3 +1,5 @@
+package ludo;
+
 public enum  Color {
     RED(0),GREEN(13),BLUE(26),YELLOW(39);
     private int startingPosition;

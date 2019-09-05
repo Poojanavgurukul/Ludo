@@ -10,8 +10,12 @@ public class Game {
         this.currentPlayerIndex=0;
     }
 
-    public void play() {
+    public void start() {
         Player currentPlayer=players.get(currentPlayerIndex);
         currentPlayer.play();
+    }
+
+    public Player getWinner() {
+        return null;
     }
 }

@@ -5,8 +5,8 @@ public class Player {
     public Player(Yard yard) {
         this.yard=yard;
     }
-
+    Dice dice = new Dice();
     public void play() {
-
+       
     }
 }

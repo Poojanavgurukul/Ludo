@@ -15,4 +15,10 @@ public class Token {
     public boolean isAtYard(){
         return position==-1;
     }
+    public void place(int startingPosition){
+        position=startingPosition;
+    }
+    public void movedBy(int numberOnDice){
+        this.position+=numberOnDice;
+    }
 }

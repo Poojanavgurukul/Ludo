@@ -1,10 +1,11 @@
 package ludo;
 
 public class Player {
-    Color color;
-    public Player(Color color) {
-        this.color=color;
+    Yard yard;
+    public Player(Yard yard) {
+        this.yard=yard;
     }
+
     public void play() {
 
     }

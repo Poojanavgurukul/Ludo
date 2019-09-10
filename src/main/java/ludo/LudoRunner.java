@@ -7,19 +7,30 @@ import java.util.List;
 public class LudoRunner {
 
     public static void main(String[] args) {
-        List<Token>tokens =new ArrayList<>();
-        for (int i = 1; i <=4 ; i++) {
-            Token token=new Token(i);
-            tokens.add(token);
+        List<Yard> yards = new ArrayList<>();
+        RedYard redYard = new RedYard();
+        BlueYard blueYard = new BlueYard();
+        yards.add(redYard);
+        yards.add(blueYard);
+
+        List<Cell> cells = new ArrayList<>();
+        for (int i = 0; i < 72; i++) {
+            Cell cell = new Cell(i);
+            cells.add(cell);
         }
-        RedYard redYard=new RedYard(tokens);
-        BlueYard blueYard=new BlueYard(tokens);
+
+        Dice dice = new Dice();
+
+        Board board = new Board(yards, cells, dice);
+
+
         List<Player> players = Arrays
                 .asList(new Player(redYard), new Player(blueYard));
+
         Game game = new Game(players);
         while (game.isRunning()) {
             game.start();
-            if (!game.isRunning()){
+            if (!game.isRunning()) {
                 return;
             }
         }

@@ -7,7 +7,7 @@ public class Game {
     private Board board;
     List<Player> players;
     int currentPlayerIndex;
-    static List<Yard> colors = new ArrayList<>();
+    static List<Yard> yards = new ArrayList<>(); // TODO rename this
     private int red=0;
     private int green=0;
     private int blue=0;
@@ -30,7 +30,7 @@ public class Game {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
     static void add(Yard yard) {
-        colors.add(yard);
+        yards.add(yard);
     }
     public boolean isRunning() {
         return !getWinner();
@@ -55,7 +55,7 @@ public class Game {
     }
 
     private Color tokenCounter() {
-        for (Yard yard : colors) {
+        for (Yard yard : yards) {
             switch (yard.getColor()) {
                 case RED:
                     this.red += 1;

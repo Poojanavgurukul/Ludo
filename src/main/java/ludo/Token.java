@@ -2,6 +2,11 @@ package ludo;
 
 public class Token {
     private int id;
+
+    public int getPosition() {
+        return position;
+    }
+
     int position=-1;
 
     @Override

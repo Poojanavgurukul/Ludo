@@ -7,31 +7,30 @@ public class Player {
     private int numberOfTokensOut = -1;
     private int id = 0;
 
-    public Player(Yard yard) {
-        this.yard = yard;
-    }
-
-    Dice dice = new Dice();
-
     public Player(Yard yard, int id) {
         this.yard = yard;
         this.id = id;
     }
 
-    private void moveAToken(int numberOnDice) {
+    private Token moveAToken(int numberOnDice) {
         System.out.println("which coin do you want move");
         Scanner scanner = new Scanner(System.in);
         int tokenToMove = scanner.nextInt();
-        yard.tokens.get(tokenToMove).moveBy(numberOnDice);
+        int position = yard.tokens.get(tokenToMove).moveBy(numberOnDice);
+        if (position >= yard.finishingPoint) {
+            System.out.println("win");
+        }
+        return yard.tokens.get(tokenToMove);
     }
 
-    private void moveTokenOut() {
+    private Token moveTokenOut() {
         numberOfTokensOut++;
         yard.tokens.get(numberOfTokensOut).place(yard.startingPoint);
+        return yard.tokens.get(numberOfTokensOut);
     }
 
-    public void play() {
-        int numberOnDice = dice.getRolled();
+    public Token play(Dice dice) {
+        int numberOnDice = dice.roll();
         int numberOfTokensAtYard = 0;
         for (Token token : yard.tokens) {
             if (token.isAtYard()) {
@@ -40,10 +39,10 @@ public class Player {
         }
         System.out.println("Color " + yard.color + " NumberOnDice " + numberOnDice + " numberOfCoinsAtHome " + numberOfTokensAtYard);
         if (numberOnDice == 6 && numberOfTokensAtYard == 4) {
-            moveTokenOut();
+            return moveTokenOut();
         }
         if (numberOnDice == 6 && numberOfTokensAtYard == 0) {
-            moveAToken(numberOnDice);
+            return moveAToken(numberOnDice);
         }
         if (numberOnDice == 6 && numberOfTokensAtYard != 4) {
             System.out.println("What do you want to do?");
@@ -52,13 +51,14 @@ public class Player {
             Scanner scanner = new Scanner(System.in);
             int userChoice = scanner.nextInt();
             if (userChoice == 1) {
-                moveAToken(numberOnDice);
+                return moveAToken(numberOnDice);
             } else {
-                moveTokenOut();
+                return moveTokenOut();
             }
         } else if (numberOfTokensAtYard != 4) {
-            moveAToken(numberOnDice);
+            return moveAToken(numberOnDice);
         }
+        return null;
     }
 
     public int getId() {

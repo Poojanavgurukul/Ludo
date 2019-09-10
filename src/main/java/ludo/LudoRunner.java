@@ -25,9 +25,9 @@ public class LudoRunner {
 
 
         List<Player> players = Arrays
-                .asList(new Player(redYard), new Player(blueYard));
+                .asList(new Player(redYard,1), new Player(blueYard,2));
 
-        Game game = new Game(board,players);
+        Game game = new Game(board, players);
         while (game.isRunning()) {
             game.start();
             if (!game.isRunning()) {

@@ -12,6 +12,7 @@ public class Game {
     private int green = 0;
     private int blue = 0;
     private int yellow = 0;
+    List<Spot> spots = new ArrayList<>();
 
     public Game(Board board, List<Player> players) {
         this.board = board;
@@ -20,9 +21,15 @@ public class Game {
 
     public void start() {
         Player currentPlayer = players.get(currentPlayerIndex);
-        currentPlayer.play();
+        Token token = currentPlayer.play(board.getDice());
+        if (token != null && token.position > currentPlayer.yard.startingPoint) {
+            int currentCell = token.position - currentPlayer.yard.startingPoint;
+            Spot spot = new Spot(board.getCells().get(currentCell), token);
+            System.out.println(token.position);
+        }
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
+
 
     static void add(Yard yard) {
         yards.add(yard);

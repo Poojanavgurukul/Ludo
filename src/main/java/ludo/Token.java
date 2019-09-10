@@ -13,13 +13,14 @@ public class Token {
         this.id=id;
     }
     public boolean isAtYard(){
-        return position==-1;
+        return this.position==-1;
     }
     public void place(int startingPosition){
-        position=startingPosition;
+        this.position=startingPosition;
     }
 
-    public void moveBy(int numberOnDice) {
+    public int moveBy(int numberOnDice) {
         this.position+=numberOnDice;
+        return this.position;
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
+    private Board board;
     List<Player> players;
     int currentPlayerIndex;
     static List<Yard> colors = new ArrayList<>();
@@ -15,6 +16,12 @@ public class Game {
     public Game(List<Player> players) {
         this.players = players;
         this.currentPlayerIndex = 0;
+    }
+
+    public Game(Board board, List<Player> players) {
+
+        this.board = board;
+        this.players = players;
     }
 
     public void start() {
@@ -42,6 +49,11 @@ public class Game {
         }
         return false;
     }
+
+    public Player getCurrentWinner() { // Rename this to getWinner
+        return new Player(new Yard(), 1);
+    }
+
     private Color tokenCounter() {
         for (Yard yard : colors) {
             switch (yard.getColor()) {
@@ -63,6 +75,10 @@ public class Game {
             return yard.getColor();
         }
         return null;
+    }
+
+    public void finish() {
+
     }
 }
 

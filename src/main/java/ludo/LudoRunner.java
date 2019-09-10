@@ -12,8 +12,8 @@ public class LudoRunner {
             Token token=new Token(i);
             tokens.add(token);
         }
-        Red redYard=new Red(tokens);
-        Blue blueYard=new Blue(tokens);
+        RedYard redYard=new RedYard(tokens);
+        BlueYard blueYard=new BlueYard(tokens);
         List<Player> players = Arrays
                 .asList(new Player(redYard), new Player(blueYard));
         Game game = new Game(players);

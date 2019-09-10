@@ -8,18 +8,12 @@ public class Game {
     List<Player> players;
     int currentPlayerIndex;
     static List<Yard> yards = new ArrayList<>(); // TODO rename this
-    private int red=0;
-    private int green=0;
-    private int blue=0;
-    private int yellow=0;
-
-    public Game(List<Player> players) {
-        this.players = players;
-        this.currentPlayerIndex = 0;
-    }
+    private int red = 0;
+    private int green = 0;
+    private int blue = 0;
+    private int yellow = 0;
 
     public Game(Board board, List<Player> players) {
-
         this.board = board;
         this.players = players;
     }
@@ -29,9 +23,11 @@ public class Game {
         currentPlayer.play();
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
+
     static void add(Yard yard) {
         yards.add(yard);
     }
+
     public boolean isRunning() {
         return !getWinner();
     }

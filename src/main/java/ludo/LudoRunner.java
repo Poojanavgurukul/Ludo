@@ -17,6 +17,11 @@ public class LudoRunner {
         List<Player> players = Arrays
                 .asList(new Player(red), new Player(blue));
         Game game = new Game(players);
-        game.start();
+        while (game.isRunning()) {
+            game.start();
+            if (!game.isRunning()){
+                return;
+            }
+        }
     }
 }

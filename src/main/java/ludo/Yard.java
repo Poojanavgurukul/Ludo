@@ -7,4 +7,8 @@ public class Yard {
     Color color;
     int startingPoint;
     int finishingPoint;
+
+    public Color getColor() {
+        return color;
+    }
 }

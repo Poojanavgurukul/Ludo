@@ -18,7 +18,8 @@ public class Token {
     public void place(int startingPosition){
         position=startingPosition;
     }
-    public void movedBy(int numberOnDice){
+
+    public void moveBy(int numberOnDice) {
         this.position+=numberOnDice;
     }
 }

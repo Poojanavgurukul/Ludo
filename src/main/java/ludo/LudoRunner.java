@@ -12,10 +12,10 @@ public class LudoRunner {
             Token token=new Token(i);
             tokens.add(token);
         }
-        Red red=new Red(tokens);
-        Blue blue=new Blue(tokens);
+        Red redYard=new Red(tokens);
+        Blue blueYard=new Blue(tokens);
         List<Player> players = Arrays
-                .asList(new Player(red), new Player(blue));
+                .asList(new Player(redYard), new Player(blueYard));
         Game game = new Game(players);
         while (game.isRunning()) {
             game.start();

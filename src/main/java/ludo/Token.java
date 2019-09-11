@@ -3,7 +3,7 @@ package ludo;
 public class Token {
     private int id;
 
-    public int getPosition() {
+    public int getCurrentPosition() {
         return position;
     }
 

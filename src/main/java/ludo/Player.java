@@ -5,25 +5,35 @@ import java.util.Scanner;
 public class Player {
     Yard yard;
     private int numberOfTokensOut = -1;
-    private int id = 0;
+    private int id;
+    private Scanner scanner = new Scanner(System.in);
 
     public Player(Yard yard, int id) {
         this.yard = yard;
         this.id = id;
     }
 
-    private Token moveAToken(int numberOnDice) {
-        System.out.println("which coin do you want move");
-        Scanner scanner = new Scanner(System.in);
-        int tokenToMove = scanner.nextInt();
-        int position = yard.tokens.get(tokenToMove).moveBy(numberOnDice);
-        if (position >= yard.finishingPoint) {
-            System.out.println("win");
+    private void moveToken(int tokenToMove, int numberOnDice) {
+        Token token = yard.tokens.get(tokenToMove);
+        int currentPosition = token.getCurrentPosition() + numberOnDice;
+        if (currentPosition > yard.finishingPoint) {
+            System.out.println("not valid move");
+            if (yard.getNumberOfTokensAtYard()< 3) {
+                System.out.println("move other coin");
+                int userInput = takeInput();
+                moveToken(userInput, numberOnDice);
+            }
         }
-        return yard.tokens.get(tokenToMove);
+        if (currentPosition <= yard.finishingPoint) {
+            int position = token.moveBy(numberOnDice);
+            System.out.println(position);
+            if (position == yard.finishingPoint) {
+                Game.add(yard); // Use yards from board
+            }
+        }
     }
 
-    private Token moveTokenOut() {
+    private Token moveTokenToStartingPoint() {
         numberOfTokensOut++;
         yard.tokens.get(numberOfTokensOut).place(yard.startingPoint);
         return yard.tokens.get(numberOfTokensOut);
@@ -31,18 +41,14 @@ public class Player {
 
     public Token play(Dice dice) {
         int numberOnDice = dice.roll();
-        int numberOfTokensAtYard = 0;
-        for (Token token : yard.tokens) {
-            if (token.isAtYard()) {
-                numberOfTokensAtYard++;
-            }
-        }
+        int numberOfTokensAtYard = yard.getNumberOfTokensAtYard();
         System.out.println("Color " + yard.color + " NumberOnDice " + numberOnDice + " numberOfCoinsAtHome " + numberOfTokensAtYard);
         if (numberOnDice == 6 && numberOfTokensAtYard == 4) {
-            return moveTokenOut();
+            return moveTokenToStartingPoint();
         }
         if (numberOnDice == 6 && numberOfTokensAtYard == 0) {
-            return moveAToken(numberOnDice);
+            int tokenToMove = takeInput();
+            moveToken(tokenToMove, numberOnDice);
         }
         if (numberOnDice == 6 && numberOfTokensAtYard != 4) {
             System.out.println("What do you want to do?");
@@ -51,17 +57,24 @@ public class Player {
             Scanner scanner = new Scanner(System.in);
             int userChoice = scanner.nextInt();
             if (userChoice == 1) {
-                return moveAToken(numberOnDice);
+                int tokenToMove = takeInput();
+                moveToken(tokenToMove, numberOnDice);
             } else {
-                return moveTokenOut();
+                return moveTokenToStartingPoint();
             }
         } else if (numberOfTokensAtYard != 4) {
-            return moveAToken(numberOnDice);
+            int tokenToMove = takeInput();
+            moveToken(tokenToMove, numberOnDice);
         }
         return null;
     }
 
     public int getId() {
         return this.id;
+    }
+
+    private int takeInput() {
+        System.out.println("Which coin do you want to move?");
+        return scanner.nextInt();
     }
 }

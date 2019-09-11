@@ -11,4 +11,13 @@ public class Yard {
     public Color getColor() {
         return color;
     }
+    public int getNumberOfTokensAtYard() { // This should be in yards
+        int numberOfCoinsAtHome = 0;
+        for (Token token : tokens) {
+            if (token.isAtYard()) {
+                numberOfCoinsAtHome++;
+            }
+        }
+        return numberOfCoinsAtHome;
+    }
 }

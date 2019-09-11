@@ -6,8 +6,8 @@ import java.util.List;
 public class Game {
     private Board board;
     List<Player> players;
-    int currentPlayerIndex;
-    static List<Yard> yards = new ArrayList<>(); // TODO rename this
+    int currentPlayerIndex=0;
+    static List<Yard> yards = new ArrayList<>();
     private int red = 0;
     private int green = 0;
     private int blue = 0;
@@ -23,7 +23,7 @@ public class Game {
         Token token = currentPlayer.play(board.getDice());
         if (token != null && token.position > currentPlayer.yard.startingPoint) {
             int currentCell = token.position - currentPlayer.yard.startingPoint;
-            System.out.println(token.position);
+            board.getCells().get(currentCell).setToken(token);
         }
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
@@ -51,10 +51,6 @@ public class Game {
         return false;
     }
 
-    public Player getCurrentWinner() { // Rename this to getWinner
-        return new Player(new Yard(), 1);
-    }
-
     private Color tokenCounter() {
         for (Yard yard : yards) {
             switch (yard.getColor()) {
@@ -76,10 +72,6 @@ public class Game {
             return yard.getColor();
         }
         return null;
-    }
-
-    public void finish() {
-
     }
 }
 
